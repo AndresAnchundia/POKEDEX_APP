@@ -22,8 +22,8 @@
 
     <form method="post">
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Ingrese el nombre del pokemon" id="'name">
-            <button type="button" class="btn btn-primary">Buscar</button>
+            <input type="text" class="form-control" placeholder="Ingrese el nombre del pokemon" name="name">
+            <button type="submit" id = "button-addon2" class="btn btn-primary">Buscar</button>
         </div>
     </form>
     <div class="d-flex justify-content-center">
@@ -33,17 +33,15 @@
                 class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">{{ pokemon.name }}</h5>
-                <p class="card-text">{{ pokemon.height }}</p>
-                <p class="card-text">{{ pokemon.weight }}</p>
-                <p class="card-text">{{ pokemon.order }}</p>
-                <p class="card-text">{{ pokemon.type }}</p>
+                <p class="card-text"> Height: {{ pokemon.height }}</p>
+                <p class="card-text"> Weight: {{ pokemon.weight }}</p>
+                <p class="card-text"> Order: {{ pokemon.order }}</p>
+                <p class="card-text"> Type: {{ pokemon.type }}</p>
                 <a href="#" class="btn btn-primary">Capturar</a>
-                <a href="#" class="btn btn-primary">Detalle</a>
+                <a href="{{url_for('detalle.html')}}" class="btn btn-primary">Detalle</a>
             </div>
         </div>
         {% endif %}
     </div>
 
 </body>
-
-</html>
