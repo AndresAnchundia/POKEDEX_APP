@@ -20,7 +20,7 @@
         <img src="{{url_for('static',filename='logo2.png')}}" class="rounded mx-auto d-block" alt="logo pokemon">
     </div>
 
-    <form method="post">
+    <form method="POST">
         <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Ingrese el nombre del pokemon" name="name">
             <button type="submit" id = "button-addon2" class="btn btn-primary">Buscar</button>
@@ -37,11 +37,15 @@
                 <p class="card-text"> Weight: {{ pokemon.weight }}</p>
                 <p class="card-text"> Order: {{ pokemon.order }}</p>
                 <p class="card-text"> Type: {{ pokemon.type }}</p>
+                <p class="card-text"> Speed: {{ pokemon.speed }}</p>
                 <a href="#" class="btn btn-primary">Capturar</a>
-                <a href="{{url_for('detalle.html')}}" class="btn btn-primary">Detalle</a>
-            </div>
+                <a href="{{ url_for('detalle', id=pokemon.id)}}" class="btn btn-primary">Detalle</a>
+            </div>    
         </div>
+        {%else %}
+            <p>No seleccionaste ningun pokemon</p>
         {% endif %}
     </div>
-
 </body>
+
+</html>
