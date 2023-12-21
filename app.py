@@ -1,6 +1,6 @@
-from flask import Flask,render_template,request
+from flask import Flask, render_template,request
 import requests
-from dotenv import load_dotenv, dotenv_values
+from dotenv import load_dotenv,dotenv_values
 
 
 from flask_sqlalchemy import SQLAlchemy
@@ -22,13 +22,16 @@ class Pokemon(db.Model):
     order: Mapped[int] = mapped_column(db.Integer,nullable=False)
     type: Mapped[str] = mapped_column(db.String,nullable=False)
 
+
 with app.app_context():
     db.create_all()
-    
+
+
 def get_pokemon_data(pokemon):
     url=f'https://pokeapi.co/api/v2/pokemon/{pokemon}'
     r = requests.get(url).json()
     return r
+
 
 @app.route("/", methods=['GET','POST'])
 def home():
@@ -38,13 +41,14 @@ def home():
         if name_pokemon: 
             data = get_pokemon_data(name_pokemon.lower())#el nombre del pokemon se lee en minuscula.
             if data:
-                pokemon={'id':data.get('id'), 
-                        'name':data.get('name').upper(),#con esta sentencia buscamos el json
-                        'height': data.get('height'), 
-                        'weight':data.get('weight'),
-                        'order':data.get('order'),
-                        'type':'Profesor',
-                        'photo':data.get('sprites').get('other').get('official-artwork').get('front_default'),
+                pokemon={
+                    'id':data.get('id'), 
+                    'name':data.get('name').upper(),#con esta sentencia buscamos el json
+                    'height': data.get('height'), 
+                    'weight':data.get('weight'),
+                    'order':data.get('order'),
+                    'type':'Profesor',
+                    'photo':data.get('sprites').get('other').get('official-artwork').get('front_default'),
                         }
     return render_template('pokemon.html', pokemon=pokemon)
 
@@ -57,7 +61,7 @@ def home():
 def detalle(id):
     data = get_pokemon_data(id)
     pokemon = {
-        'photo': data.get("sprites").get("other").get("official-artwork").get("front_default"),
+        'photo': data.get("sprites").get("other").get("dream_world").get("front_default"),
         'name': data.get("name").upper(),
         'hp': data.get("stats")[0].get("base_stat"),
         'attack': data.get("stats")[1].get("base_stat"),
